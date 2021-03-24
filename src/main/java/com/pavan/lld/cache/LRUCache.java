@@ -8,17 +8,20 @@ public class LRUCache extends AbstractCache {
 
 	@Override
 	public void put(Object key, Object value) {
-		if(list.size()==cacheSize) {
-			removeLast();
+		if(list.contains(key)) {
+			list.remove(key);
 		}
-		list.addFirst(key);
-		map.put(key, value);
+			if (list.size() == cacheSize) {
+				removeLast();
+			}
+			list.addFirst(key);
+			map.put(key, value);
 	}
 
 	@Override
 	public Object get(Object key) {
 		boolean res = list.remove(key);
-		if(res) {
+		if (res) {
 			list.addFirst(key);
 			return map.get(key);
 		}

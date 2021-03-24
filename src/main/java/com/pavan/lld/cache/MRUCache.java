@@ -8,6 +8,9 @@ public class MRUCache extends AbstractCache {
 
 	@Override
 	public void put(Object key, Object value) {
+		if(list.contains(key)) {
+			list.remove(key);
+		}
 		if (list.size() == cacheSize) {
 			removeLast();
 		}
